@@ -245,7 +245,7 @@ A detailed explanation can be found in this [document][commit-message-format].
 
 [coc]: https://github.com/graycoreio/daffodil/code-of-conduct/blob/develop/CODE_OF_CONDUCT.md
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
-[dev-doc]: https://github.com/graycoreio/daffodil/blob/develop/docs/DEVELOPER.md
+[dev-doc]: https://github.com/graycoreio/daffodil/blob/develop/docs/internal/DEVELOPER.md
 [github]: https://github.com/graycoreio/daffodil
 [gitter]: https://gitter.im/graycoreio/daffodil
 [js-style-guide]: https://google.github.io/styleguide/jsguide.html
