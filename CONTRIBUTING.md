@@ -26,7 +26,7 @@ Stack Overflow is a much better place to ask questions since:
 
 To save your and our time, we will systematically close all issues that are requests for general support and redirect people to Stack Overflow.
 
-If you would like to chat about the question in real-time, you can reach out via [our gitter channel][gitter].
+If you would like to chat about the question in real-time, you can reach out via [our discord server][discord].
 
 ## <a name="issue"></a> Found a Bug?
 If you find a bug in the source code, you can help us by
@@ -50,15 +50,15 @@ and help you to craft the change so that it is successfully accepted into the pr
 
 Before you submit an issue, please search the issue tracker, maybe an issue for your problem already exists and the discussion might inform you of workarounds readily available.
 
-We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. In order to reproduce bugs, we will systematically ask you to provide a minimal reproduction scenario using http://plnkr.co. Having a live, reproducible scenario gives us a wealth of important information without going back & forth to you with additional questions like:
+We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. In order to reproduce bugs, we will systematically ask you to provide a minimal reproduction scenario using [Stackblitz][stackblitz]. Having a live, reproducible scenario gives us a wealth of important information without going back & forth to you with additional questions like:
 
 - version of Daffodil used
 - 3rd-party libraries and their versions
 - and most importantly - a use-case that fails
 
-A minimal reproduce scenario using http://plnkr.co/ allows us to quickly confirm a bug (or point out coding problem) as well as confirm that we are fixing the right problem. If plunker is not a suitable way to demonstrate the problem (for example for issues related to our npm packaging), please create a standalone git repository demonstrating the problem.
+A minimal reproduce scenario using [Stackblitz][stackblitz] allows us to quickly confirm a bug (or point out coding problem) as well as confirm that we are fixing the right problem. If Stackblitz is not a suitable way to demonstrate the problem (for example for issues related to our npm packaging), please create a standalone git repository demonstrating the problem.
 
-We will be insisting on a minimal reproduce scenario in order to save maintainers time and ultimately be able to fix more bugs. Interestingly, from our experience users often find coding problems themselves while preparing a minimal plunk. We understand that sometimes it might be hard to extract essentials bits of code from a larger code-base but we really need to isolate the problem before we can fix it.
+We will be insisting on a minimal reproduce scenario in order to save maintainers time and ultimately be able to fix more bugs. Interestingly, from our experience users often find coding problems themselves while preparing a minimal stackblitz. We understand that sometimes it might be hard to extract essentials bits of code from a larger code-base but we really need to isolate the problem before we can fix it.
 
 Unfortunately, we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you we are going to close an issue that doesn't have enough info to be reproduced.
 
@@ -146,9 +146,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
 * All public API methods **must be documented**. (Details TBC).
-* We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
-  **100 characters**. An automated formatter is available, see
-  [DEVELOPER.md](docs/DEVELOPER.md#clang-format).
+* We use various linting programs to automatically format our files. See the [developer docs][dev-doc] for more info.
 
 ## <a name="commit"></a> Commit Message Guidelines
 
@@ -206,22 +204,15 @@ The scope should be the name of the npm package affected (as perceived by the pe
 
 The following is the list of supported scopes:
 
-#### Libraries
-* **branding**
-* **core**
-* **cart**
-* **checkout**
-* **design**
-* **driver**
-* **geography**
-* **product**
-* **newsletter**
-* **seo**
+- [Any app name](https://github.com/graycoreio/daffodil/tree/develop/apps)
+- [Any library folder's name](https://github.com/graycoreio/daffodil/tree/develop/libs)
 
-#### Apps
-* **all**
-* **demo**
-* **daffio**
+In the event that a changeset impacts many packages (i.e. a dependency upgrade), please forego use a scope at all i.e.
+
+```
+feat: upgrade Angular to version 19
+```
+
 
 ### Subject
 The subject contains a succinct description of the change:
@@ -243,12 +234,11 @@ reference GitHub issues that this commit **Closes**.
 A detailed explanation can be found in this [document][commit-message-format].
 
 
-[coc]: https://github.com/graycoreio/daffodil/code-of-conduct/blob/develop/CODE_OF_CONDUCT.md
+[coc]: https://github.com/graycoreio/daffodil/blob/develop/CODE_OF_CONDUCT.md
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
 [dev-doc]: https://github.com/graycoreio/daffodil/blob/develop/docs/internal/DEVELOPER.md
 [github]: https://github.com/graycoreio/daffodil
-[gitter]: https://gitter.im/graycoreio/daffodil
+[discord]: https://discord.com/invite/BdaJVZ53sR
 [js-style-guide]: https://google.github.io/styleguide/jsguide.html
-[jsfiddle]: http://jsfiddle.net
-[plunker]: http://plnkr.co/edit
+[stackblitz]: https://stackblitz.com/github/graycoreio/stackblitz-projects/tree/main/ng18-daffodil-product-driver-switch
 [stackoverflow]: http://stackoverflow.com/questions/tagged/daffodil
