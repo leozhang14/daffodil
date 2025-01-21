@@ -33,6 +33,7 @@ interface ProductNode {
   title: string;
   description: string;
   onlineStoreUrl: string;
+  availableForSale: boolean;
   priceRange: {
     maxVariantPrice: {
       amount: number;
@@ -57,6 +58,7 @@ export const GetAllProductsQuery = gql`
       edges {
         node {
           onlineStoreUrl
+          availableForSale
           priceRange {
             maxVariantPrice {
               amount
@@ -88,6 +90,7 @@ export const GetProductByIdQuery = gql`
      id
      title
      description
+     availableForSale
      priceRange {
        maxVariantPrice {
          amount
@@ -132,6 +135,8 @@ const DaffShopifyProductTransformer = (node: ProductNode): DaffProduct => ({
   url: node.onlineStoreUrl,
   type: DaffProductTypeEnum.Simple,
   price: node.priceRange.maxVariantPrice.amount,
+  discount: null,
+  in_stock: node.availableForSale,
   description: node.description,
 });
 
