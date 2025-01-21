@@ -171,7 +171,7 @@ implements DaffProductServiceInterface {
     return this.getAll();
   }
 
-  get(productId: string): Observable<DaffProductDriverResponse<DaffProduct>> {
+  get(productId: string): Observable<DaffProductDriverResponse> {
     return this.apollo
       .query<ProductNode>({
         query: GetProductByIdQuery,
@@ -189,11 +189,11 @@ implements DaffProductServiceInterface {
       );
   }
 
-  getByUrl(url: string): Observable<DaffProductDriverResponse<DaffProduct>> {
+  getByUrl(url: string): Observable<DaffProductDriverResponse> {
     return this.apollo
       .query<GetAllProductsResponse>({
         query: GetAllProductsQuery,
-        variables: { first: 50 }, // Adjust the number to fit max number of products in store
+        variables: { first: 20 }, // Adjust the number to fit max number of products in store
       })
       .pipe(
         map((result) => {
