@@ -79,8 +79,35 @@ export const GetAllProductsQuery = gql`
   }
 `;
 
+/**
+ * GraphQL query object for getting all products.
+ */
+export const GetProductByIdQuery = gql`
+ query ShopifyGetProductById($id: ID!) {
+   product(id: $id) {
+     id
+     title
+     description
+     priceRange {
+       maxVariantPrice {
+         amount
+         currencyCode
+       }
+     }
+     images(first: 1) {
+       nodes {
+         id
+         url
+         altText
+       }
+     }
+     onlineStoreUrl
+   }
+ }
+`;
+
 // To be implemented properly later
-export const GetAProduct = GetAllProductsQuery;
+export const GetAProduct = GetProductByIdQuery;
 
 /**
  * Transforms a ProductNode into a different object.
@@ -141,12 +168,47 @@ implements DaffProductServiceInterface {
 
   // Following methods not yet implemented - could be defaulted to the getAll() method for testing
   getBestSellers(): Observable<DaffProduct[]> {
-    throw new Error('Method not implemented.');
+    return this.getAll();
   }
+
   get(productId: string): Observable<DaffProductDriverResponse<DaffProduct>> {
-    throw new Error('Method not implemented.');
+    return this.apollo
+      .query<ProductNode>({
+        query: GetProductByIdQuery,
+        variables: { productId },
+      })
+      .pipe(
+        map((result) => {
+          const productNode = result.data;
+          // Return the transformed data in the expected structure of DaffProductDriverResponse
+          return {
+            id: productNode.id,
+            products: [DaffShopifyProductTransformer(productNode)],
+          };
+        }),
+      );
   }
+
   getByUrl(url: string): Observable<DaffProductDriverResponse<DaffProduct>> {
-    throw new Error('Method not implemented.');
+    return this.apollo
+      .query<GetAllProductsResponse>({
+        query: GetAllProductsQuery,
+        variables: { first: 50 }, // Adjust the number to fit max number of products in store
+      })
+      .pipe(
+        map((result) => {
+          const products = result.data?.products?.edges || [];
+          // Find the product by matching the URL
+          const matchedProduct = products.find((edge) => edge.node.onlineStoreUrl === url)?.node;
+          if (!matchedProduct) {
+            throw new Error(`Product with URL ${url} not found.`);
+          }
+          // Transform the matched product into the expected DaffProductDriverResponse format
+          return {
+            id: matchedProduct.id,
+            products: [DaffShopifyProductTransformer(matchedProduct)],
+          };
+        }),
+      );
   }
 }
