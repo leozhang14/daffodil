@@ -10,6 +10,8 @@ import { DaffProductFactory } from '@daffodil/product/testing';
 import { DaffShopifyProductService } from './product.service';
 import { getAllProducts } from './queries/get-all-products/get-all-products';
 import { getProduct } from './queries/get-product/get-product';
+import { getProductByUrl } from './queries/get-product-by-url/get-product-by-url';
+import { shopifyUrlTransformer } from './transforms/shopify-url-transform';
 
 describe('Driver | Shopify | Product | ProductService', () => {
   let productService: DaffShopifyProductService;
@@ -93,6 +95,45 @@ describe('Driver | Shopify | Product | ProductService', () => {
       const op = controller.expectOne(getProduct);
 
       expect(op.operation.variables.id).toEqual(product.id);
+
+      op.flush({
+        data: {
+          handle: '',
+          id: product.id,
+          title: product.name,
+          description: product.description,
+          availableForSale: product.in_stock,
+          onlineStoreUrl: product.canonicalUrl,
+          priceRange: {
+            maxVariantPrice: {
+              amount: product.price,
+              currencyCode: 'USD',
+            },
+          },
+          images: {
+            nodes: [],
+          },
+        },
+      });
+    });
+
+    afterEach(() => {
+      controller.verify();
+    });
+  });
+
+  describe('getByUrl | getting a single product', () => {
+    it('should return an observable single product', done => {
+      const product = productFactory.create();
+
+      productService.getByUrl(product.url).subscribe((result) => {
+        expect(result.id).toEqual(product.id);
+        expect(result.products[0].name).toEqual(product.name);
+        done();
+      });
+
+      const op = controller.expectOne(getProductByUrl);
+      expect(op.operation.variables.handle).toEqual(shopifyUrlTransformer(product.url));
 
       op.flush({
         data: {
