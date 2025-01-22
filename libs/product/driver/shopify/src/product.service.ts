@@ -127,9 +127,9 @@ const DaffShopifyProductTransformer = (node: ProductNode): DaffProduct => ({
     label: imageNode.altText,
   })),
   thumbnail: {
-    url: node.images.nodes[0].url,
-    label: node.images.nodes[0].altText,
-    id: node.images.nodes[0].id,
+    url: node.images.nodes[0]?.url,
+    label: node.images.nodes[0]?.altText,
+    id: node.images.nodes[0]?.id,
   },
   id: node.id,
   url: node.onlineStoreUrl,

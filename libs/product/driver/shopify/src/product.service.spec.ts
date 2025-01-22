@@ -54,13 +54,25 @@ describe('Driver | Shopify | Product | ProductService', () => {
 
       op.flush({
         data:{
-          shop: {
-            products: {
-              edges: products.map(product => ({ node: {
-                title: product.name,
+          products: {
+            edges: products.map((product) => ({
+              node: {
+                onlineStoreUrl: product.canonicalUrl,
+                availableForSale: product.in_stock,
+                priceRange: {
+                  maxVariantPrice: {
+                    amount: product.price,
+                    currencyCode: 'USD',
+                  },
+                },
                 id: product.id,
-              }})),
-            },
+                title: product.name,
+                description: product.description,
+                images: {
+                  nodes: [],
+                },
+              },
+            })),
           },
         },
       });
@@ -87,10 +99,19 @@ describe('Driver | Shopify | Product | ProductService', () => {
 
       op.flush({
         data: {
-          node: {
-            __typename: 'Product',
-            id: product.id,
-            title: product.name,
+          id: product.id,
+          title: product.name,
+          description: product.description,
+          availableForSale: product.in_stock,
+          onlineStoreUrl: product.canonicalUrl,
+          priceRange: {
+            maxVariantPrice: {
+              amount: product.price,
+              currencyCode: 'USD',
+            },
+          },
+          images: {
+            nodes: [],
           },
         },
       });
