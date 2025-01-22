@@ -7,11 +7,9 @@ import {
 import { DaffProductFactory } from '@daffodil/product/testing';
 
 
-import {
-  DaffShopifyProductService,
-  GetAllProductsQuery,
-  GetAProduct,
-} from './product.service';
+import { DaffShopifyProductService } from './product.service';
+import { getAllProducts } from './queries/get-all-products/get-all-products';
+import { getProduct } from './queries/get-product/get-product';
 
 describe('Driver | Shopify | Product | ProductService', () => {
   let productService: DaffShopifyProductService;
@@ -48,29 +46,27 @@ describe('Driver | Shopify | Product | ProductService', () => {
 
       const products = productFactory.createMany(20);
 
-      const op = controller.expectOne(GetAllProductsQuery);
+      const op = controller.expectOne(getAllProducts);
 
       expect(op.operation.variables.length).toEqual(20);
 
       op.flush({
         data:{
           products: {
-            edges: products.map((product) => ({
-              node: {
-                onlineStoreUrl: product.canonicalUrl,
-                availableForSale: product.in_stock,
-                priceRange: {
-                  maxVariantPrice: {
-                    amount: product.price,
-                    currencyCode: 'USD',
-                  },
+            nodes: products.map((product) => ({
+              onlineStoreUrl: product.canonicalUrl,
+              availableForSale: product.in_stock,
+              priceRange: {
+                maxVariantPrice: {
+                  amount: product.price,
+                  currencyCode: 'USD',
                 },
-                id: product.id,
-                title: product.name,
-                description: product.description,
-                images: {
-                  nodes: [],
-                },
+              },
+              id: product.id,
+              title: product.name,
+              description: product.description,
+              images: {
+                nodes: [],
               },
             })),
           },
@@ -93,7 +89,7 @@ describe('Driver | Shopify | Product | ProductService', () => {
         done();
       });
 
-      const op = controller.expectOne(GetAProduct);
+      const op = controller.expectOne(getProduct);
 
       expect(op.operation.variables.id).toEqual(product.id);
 
