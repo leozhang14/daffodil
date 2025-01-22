@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { DaffLocatable } from '@daffodil/core';
 import { DaffProduct } from '@daffodil/product';
 import {
   DaffProductDriverResponse,
@@ -11,11 +12,13 @@ import {
 
 import { getAllProducts } from './queries/get-all-products/get-all-products';
 import { getProduct } from './queries/get-product/get-product';
+import { getProductByUrl } from './queries/get-product-by-url/get-product-by-url';
 import {
   AllProductsResponse,
   SingleProductResponse,
 } from './queries/response.type';
-import { daffShopifyProductTransformer } from './transforms/product.transform';
+import { daffShopifyProductTransformer } from './transforms/daff-product-transform';
+import { shopifyUrlTransformer } from './transforms/shopify-url-transform';
 
 /**
  * A service for getting DaffProducts from apollo shopify product requests.
@@ -72,22 +75,21 @@ implements DaffProductServiceInterface {
       );
   }
 
+  /**
+   * See {@link DaffLocatable} for more information on the requirements for the url argument of {@link DaffProduct}.
+   */
   getByUrl(url: DaffProduct['url']): Observable<DaffProductDriverResponse> {
     return this.apollo
-      .query<AllProductsResponse>({
-        query: getAllProducts,
-        variables: { length: this.defaultLength },
+      .query<SingleProductResponse>({
+        query: getProductByUrl,
+        variables: { handle: shopifyUrlTransformer(url) },
       })
       .pipe(
         map((result) => {
-          const products = result.data?.products?.nodes || [];
-          const matchedProduct = products.find((node) => node.onlineStoreUrl === url);
-          if (!matchedProduct) {
-            throw new Error(`Product with URL ${url} not found.`);
-          }
+          const productNode = result.data;
           return {
-            id: matchedProduct.id,
-            products: [daffShopifyProductTransformer(matchedProduct)],
+            id: productNode.id,
+            products: [daffShopifyProductTransformer(productNode)],
           };
         }),
       );

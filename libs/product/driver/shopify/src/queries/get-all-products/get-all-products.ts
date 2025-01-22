@@ -12,6 +12,7 @@ export const getAllProducts = gql<AllProductsResponse, AllProductsVariables>`
 	query ${DAFF_SHOPIFY_GET_ALL_PRODUCTS_QUERY_NAME}($length: Int) {
 		products(first: $length)  {
 			nodes {
+				handle
 				onlineStoreUrl
 				availableForSale
 				priceRange {

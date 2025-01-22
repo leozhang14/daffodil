@@ -1,16 +1,16 @@
 import { gql } from 'apollo-angular';
 
 import { SingleProductResponse } from '../response.type';
-import { IDProductVariables } from '../variables.type';
+import { URLProductVariables } from '../variables.type';
 
-export const DAFF_SHOPIFY_GET_PRODUCT_QUERY_NAME = 'ShopifyGetAProduct';
+export const DAFF_SHOPIFY_GET_PRODUCT_BY_URL_QUERY_NAME = 'ShopifyGetProductByURL';
 
 /**
  * GraphQL query object for getting all products.
  */
-export const getProduct = gql<SingleProductResponse, IDProductVariables>`
- query ${DAFF_SHOPIFY_GET_PRODUCT_QUERY_NAME}($id: ID!) {
-	 product(id: $id) {
+export const getProductByUrl = gql<SingleProductResponse, URLProductVariables>`
+ query ${DAFF_SHOPIFY_GET_PRODUCT_BY_URL_QUERY_NAME}($handle: String!) {
+	 product(handle: $handle) {
 		 handle
 		 id
 		 title

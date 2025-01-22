@@ -54,6 +54,7 @@ describe('Driver | Shopify | Product | ProductService', () => {
         data:{
           products: {
             nodes: products.map((product) => ({
+              handle: '',
               onlineStoreUrl: product.canonicalUrl,
               availableForSale: product.in_stock,
               priceRange: {
@@ -95,6 +96,7 @@ describe('Driver | Shopify | Product | ProductService', () => {
 
       op.flush({
         data: {
+          handle: '',
           id: product.id,
           title: product.name,
           description: product.description,

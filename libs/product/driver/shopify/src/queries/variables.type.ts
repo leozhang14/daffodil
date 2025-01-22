@@ -7,5 +7,5 @@ export interface IDProductVariables {
 }
 
 export interface URLProductVariables {
-  url: string;
+  handle: string;
 }
