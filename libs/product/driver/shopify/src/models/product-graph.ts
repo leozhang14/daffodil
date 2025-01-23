@@ -1,5 +1,5 @@
 import { ProductNode } from './shopify-product';
 
-export interface Products {
+export interface ProductGraph {
   nodes: ProductNode[];
 }

@@ -1,8 +1,8 @@
-import { Products } from '../models/products';
+import { ProductGraph } from '../models/product-graph';
 import { ProductNode } from '../models/shopify-product';
 
 export interface AllProductsResponse {
-  products?: Products;
+  products?: ProductGraph;
 }
 
 export interface SingleProductResponse extends ProductNode {};
