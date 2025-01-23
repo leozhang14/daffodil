@@ -3,7 +3,7 @@ import {
   DaffProductTypeEnum,
 } from '@daffodil/product';
 
-import { ProductNode } from '../models/shopify-product';
+import { ShopifyProductNode } from '../models/product-node';
 
 /**
  * Transforms a ProductNode into a different object.
@@ -11,7 +11,7 @@ import { ProductNode } from '../models/shopify-product';
  * @param node - ProductNode object
  * @returns A Product object
  */
-export const daffShopifyProductTransformer = (node: ProductNode): DaffProduct => ({
+export const daffShopifyProductTransformer = (node: ShopifyProductNode): DaffProduct => ({
   name: node.title,
   images: node.images.nodes.map(imageNode => ({
     id: imageNode.id,

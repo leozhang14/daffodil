@@ -14,10 +14,10 @@ import { getAllProducts } from './queries/get-all-products/get-all-products';
 import { getProduct } from './queries/get-product/get-product';
 import { getProductByUrl } from './queries/get-product-by-url/get-product-by-url';
 import {
-  AllProductsResponse,
-  SingleProductResponse,
+  ShopifyProductAllResponse,
+  ShopifyProductSingleResponse,
 } from './queries/response.type';
-import { daffShopifyProductTransformer } from './transforms/daff-product-transform';
+import { daffShopifyProductTransformer } from './transforms/shopify-daff-product-transform';
 import { shopifyUrlTransformer } from './transforms/shopify-url-transform';
 
 /**
@@ -37,7 +37,7 @@ implements DaffProductServiceInterface {
 
   getAll(): Observable<DaffProduct[]> {
     return this.apollo
-      .query<AllProductsResponse>({
+      .query<ShopifyProductAllResponse>({
         query: getAllProducts,
         variables: {
           length: this.defaultLength,
@@ -60,7 +60,7 @@ implements DaffProductServiceInterface {
 
   get(productId: DaffProduct['id']): Observable<DaffProductDriverResponse> {
     return this.apollo
-      .query<SingleProductResponse>({
+      .query<ShopifyProductSingleResponse>({
         query: getProduct,
         variables: { id: productId },
       })
@@ -80,7 +80,7 @@ implements DaffProductServiceInterface {
    */
   getByUrl(url: DaffProduct['url']): Observable<DaffProductDriverResponse> {
     return this.apollo
-      .query<SingleProductResponse>({
+      .query<ShopifyProductSingleResponse>({
         query: getProductByUrl,
         variables: { handle: shopifyUrlTransformer(url) },
       })

@@ -1,8 +1,8 @@
-import { ProductGraph } from '../models/product-graph';
-import { ProductNode } from '../models/shopify-product';
+import { ShopifyProductGraph } from '../models/product-graph';
+import { ShopifyProductNode } from '../models/product-node';
 
-export interface AllProductsResponse {
-  products?: ProductGraph;
+export interface ShopifyProductAllResponse {
+  products?: ShopifyProductGraph;
 }
 
-export interface SingleProductResponse extends ProductNode {};
+export interface ShopifyProductSingleResponse extends ShopifyProductNode {};

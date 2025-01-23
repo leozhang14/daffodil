@@ -1,11 +1,11 @@
-export interface AllProductsVariables {
+export interface ShopifyProductAllVariables {
   length: number;
 }
 
-export interface IDProductVariables {
+export interface ShopifyProductIDVariables {
   id: string;
 }
 
-export interface URLProductVariables {
+export interface ShopifyProductUrlVariables {
   handle: string;
 }
