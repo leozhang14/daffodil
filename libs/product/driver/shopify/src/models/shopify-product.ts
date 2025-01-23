@@ -6,7 +6,7 @@ export interface ProductNode {
   id: string;
   title: string;
   description: string;
-  onlineStoreUrl: string;
+  onlineStoreUrl: string | null;
   availableForSale: boolean;
   priceRange: ProductPriceRange;
   images: ProductImages;
