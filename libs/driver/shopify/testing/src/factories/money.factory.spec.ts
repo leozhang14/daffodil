@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ShopifyMoneyV2 } from '@daffodil/product/driver/shopify';
+import { ShopifyMoney } from '@daffodil/driver/shopify';
 
-import { ShopifyMoneyFactory } from './shopify-money.factory';
+import { ShopifyMoneyFactory } from './money.factory';
 
 describe('@daffodil/product/driver/shopify/testing | ShopifyMoneyFactory', () => {
 
@@ -22,7 +22,7 @@ describe('@daffodil/product/driver/shopify/testing | ShopifyMoneyFactory', () =>
 
   describe('create', () => {
 
-    let result: ShopifyMoneyV2;
+    let result: ShopifyMoney;
 
     beforeEach(() => {
       result = factory.create();

@@ -1,5 +1,5 @@
-import { ShopifyMoneyV2 } from './shopify-money';
+import { ShopifyMoney } from '@daffodil/driver/shopify';
 
 export interface ShopifyProductPriceRange {
-  maxVariantPrice: ShopifyMoneyV2;
+  maxVariantPrice: ShopifyMoney;
 }
