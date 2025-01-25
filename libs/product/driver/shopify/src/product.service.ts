@@ -10,15 +10,17 @@ import {
   DaffProductServiceInterface,
 } from '@daffodil/product/driver';
 
-import { getAllProducts } from './queries/get-all-products/get-all-products';
-import { getProduct } from './queries/get-product/get-product';
-import { getProductByUrl } from './queries/get-product-by-url/get-product-by-url';
 import {
+  getAllProducts,
+  getProduct,
+  getProductByUrl,
   ShopifyProductAllResponse,
   ShopifyProductSingleResponse,
-} from './queries/response.type';
-import { daffShopifyProductTransformer } from './transforms/shopify-daff-product-transform';
-import { shopifyUrlTransformer } from './transforms/shopify-url-transform';
+} from './queries/public_api';
+import {
+  daffShopifyProductTransformer,
+  shopifyUrlTransformer,
+} from './transforms/public_api';
 
 /**
  * A service for getting DaffProducts from apollo shopify product requests.

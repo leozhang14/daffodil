@@ -8,10 +8,12 @@ import { DaffProductFactory } from '@daffodil/product/testing';
 
 
 import { DaffShopifyProductService } from './product.service';
-import { getAllProducts } from './queries/get-all-products/get-all-products';
-import { getProduct } from './queries/get-product/get-product';
-import { getProductByUrl } from './queries/get-product-by-url/get-product-by-url';
-import { shopifyUrlTransformer } from './transforms/shopify-url-transform';
+import {
+  getAllProducts,
+  getProduct,
+  getProductByUrl,
+} from './queries/public_api';
+import { shopifyUrlTransformer } from './transforms/public_api';
 
 describe('Driver | Shopify | Product | ProductService', () => {
   let productService: DaffShopifyProductService;

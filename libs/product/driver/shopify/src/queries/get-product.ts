@@ -1,7 +1,7 @@
 import { gql } from 'apollo-angular';
 
-import { ShopifyProductSingleResponse } from '../response.type';
-import { ShopifyProductIDVariables } from '../variables.type';
+import { ShopifyProductSingleResponse } from './response.types';
+import { ShopifyProductIDVariables } from './variables.types';
 
 export const DAFF_SHOPIFY_GET_PRODUCT_QUERY_NAME = 'ShopifyGetAProduct';
 
