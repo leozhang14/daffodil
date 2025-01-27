@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import { faker } from '@faker-js/faker/locale/en_US';
 
 import { DaffModelFactory } from '@daffodil/core/testing';
+import { ShopifyMoneyFactory } from '@daffodil/driver/shopify/testing';
 import { ShopifyProductPriceRange } from '@daffodil/product/driver/shopify';
 
 class MockShopifyProductPriceRange implements ShopifyProductPriceRange {
-  maxVariantPrice = {
-    amount: parseFloat(faker.commerce.price()),
-    currencyCode: faker.finance.currencyCode(),
-  };
+  maxVariantPrice = this.shopifyMoneyFactory.create();
+  constructor(
+    protected shopifyMoneyFactory: ShopifyMoneyFactory,
+  ) {}
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopifyProductPriceRangeFactory extends DaffModelFactory<ShopifyProductPriceRange> {
-  constructor(){
-    super(MockShopifyProductPriceRange);
+  constructor(
+    shopifyMoneyFactory: ShopifyMoneyFactory,
+  ){
+    super(MockShopifyProductPriceRange, shopifyMoneyFactory);
   }
 }
