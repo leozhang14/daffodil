@@ -1,5 +1,3 @@
-export * from './get-all-products';
-export * from './get-product-by-url';
-export * from './get-product';
+export * from './gql/public_api';
 export * from './variables.types';
 export * from './response.types';
