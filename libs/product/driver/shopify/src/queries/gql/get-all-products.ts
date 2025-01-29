@@ -3,13 +3,11 @@ import { gql } from 'apollo-angular';
 import { ShopifyProductAllResponse } from '../response.types';
 import { ShopifyProductAllVariables } from '../variables.types';
 
-export const DAFF_SHOPIFY_GET_ALL_PRODUCTS_QUERY_NAME = 'ShopifyGetAllProducts';
-
 /**
  * GraphQL query object for getting all products.
  */
 export const getAllProducts = gql<ShopifyProductAllResponse, ShopifyProductAllVariables>`
-	query ${DAFF_SHOPIFY_GET_ALL_PRODUCTS_QUERY_NAME}($length: Int) {
+	query ShopifyGetAllProducts($length: Int) {
 		products(first: $length)  {
 			nodes {
 				handle
