@@ -8689,7 +8689,7 @@ export type ShopifyGetAllProductsQueryVariables = Exact<{
 }>;
 
 
- export type ShopifyGetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', handle: string, onlineStoreUrl?: any | null, availableForSale: boolean, id: string, title: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } }> } };
+export type ShopifyGetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', handle: string, onlineStoreUrl?: any | null, availableForSale: boolean, id: string, title: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } }> } };
 
 export type ShopifyGetProductByUrlQueryVariables = Exact<{
   handle: Scalars['String']['input'];

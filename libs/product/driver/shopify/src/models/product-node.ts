@@ -1,4 +1,4 @@
-import { ShopifyGetAProductQuery } from '@daffodil/driver/graphql';
+import { ShopifyGetAProductQuery } from '@daffodil/driver/shopify';
 
 export type ShopifyProductNodeType = ShopifyGetAProductQuery['product'];
 
