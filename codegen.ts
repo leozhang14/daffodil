@@ -6,7 +6,7 @@ const config: CodegenConfig = {
   schema: './shopify-storefront-schema.json',
   documents: './libs/product/driver/shopify/src/queries/gql/**/*.ts',
   generates: {
-    './libs/product/driver/shopify/src/graphql/generated-shopify-types.ts': {
+    './libs/driver/graphql/src/generated-types/generated-shopify-types.ts': {
       plugins: ['typescript', 'typescript-operations', 'typescript-apollo-angular'],
     },
   },
