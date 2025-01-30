@@ -30,6 +30,7 @@ describe('@daffodil/product/driver/shopify/testing | ShopifyProductPriceRangeFac
 
     it('should return', () => {
       expect(result.maxVariantPrice).toBeDefined();
+      expect(result.minVariantPrice).toBeDefined();
     });
   });
 });

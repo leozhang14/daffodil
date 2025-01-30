@@ -19,6 +19,10 @@ export const getProductByUrl = gql<ShopifyProductSingleResponse, ShopifyProductU
 				 amount
 				 currencyCode
 			 }
+			 minVariantPrice {
+						amount
+						currencyCode
+			 }
 		 }
 		 images(first: 1) {
 			 nodes {

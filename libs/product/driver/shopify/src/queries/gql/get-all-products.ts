@@ -18,6 +18,10 @@ export const getAllProducts = gql<ShopifyProductAllResponse, ShopifyProductAllVa
 						amount
 						currencyCode
 					}
+					minVariantPrice {
+						amount
+						currencyCode
+					}
 				}
 				id
 				title

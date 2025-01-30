@@ -8689,21 +8689,21 @@ export type ShopifyGetAllProductsQueryVariables = Exact<{
 }>;
 
 
-export type ShopifyGetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', handle: string, onlineStoreUrl?: any | null, availableForSale: boolean, id: string, title: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } }> } };
+ export type ShopifyGetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', handle: string, onlineStoreUrl?: any | null, availableForSale: boolean, id: string, title: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } }> } };
 
 export type ShopifyGetProductByUrlQueryVariables = Exact<{
   handle: Scalars['String']['input'];
 }>;
 
 
-export type ShopifyGetProductByUrlQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', handle: string, id: string, title: string, description: string, availableForSale: boolean, onlineStoreUrl?: any | null, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } } | null };
+export type ShopifyGetProductByUrlQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', handle: string, id: string, title: string, description: string, availableForSale: boolean, onlineStoreUrl?: any | null, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } } | null };
 
 export type ShopifyGetAProductQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type ShopifyGetAProductQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', handle: string, id: string, title: string, description: string, availableForSale: boolean, onlineStoreUrl?: any | null, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } } | null };
+export type ShopifyGetAProductQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', handle: string, id: string, title: string, description: string, availableForSale: boolean, onlineStoreUrl?: any | null, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } } | null };
 
 export const ShopifyGetAllProductsDocument = gql`
     query ShopifyGetAllProducts($length: Int) {
@@ -8714,6 +8714,10 @@ export const ShopifyGetAllProductsDocument = gql`
       availableForSale
       priceRange {
         maxVariantPrice {
+          amount
+          currencyCode
+        }
+        minVariantPrice {
           amount
           currencyCode
         }
@@ -8756,6 +8760,10 @@ export const ShopifyGetProductByUrlDocument = gql`
         amount
         currencyCode
       }
+      minVariantPrice {
+        amount
+        currencyCode
+      }
     }
     images(first: 1) {
       nodes {
@@ -8789,6 +8797,10 @@ export const ShopifyGetAProductDocument = gql`
     availableForSale
     priceRange {
       maxVariantPrice {
+        amount
+        currencyCode
+      }
+      minVariantPrice {
         amount
         currencyCode
       }

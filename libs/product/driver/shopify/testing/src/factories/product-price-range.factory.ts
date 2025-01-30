@@ -6,6 +6,7 @@ import { ShopifyProductPriceRange } from '@daffodil/product/driver/shopify';
 
 class MockShopifyProductPriceRange implements ShopifyProductPriceRange {
   maxVariantPrice = this.shopifyMoneyFactory.create();
+  minVariantPrice = this.shopifyMoneyFactory.create();
   constructor(
     protected shopifyMoneyFactory: ShopifyMoneyFactory,
   ) {}
