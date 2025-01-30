@@ -1,0 +1,2 @@
+exclude_patterns:
+- "libs/driver/shopify/src/codegen/generated-shopify-types.ts"
