@@ -1,5 +1,5 @@
-export interface ShopifyImageNode {
-  id: string;
-  url: string;
-  altText: string | null;
-}
+import { ShopifyProductImages } from './product-images';
+
+type ShopifyProductImageNodeType = ShopifyProductImages['nodes'][number];
+
+export interface ShopifyProductImageNode extends ShopifyProductImageNodeType {}

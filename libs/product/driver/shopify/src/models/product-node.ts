@@ -1,13 +1,5 @@
-import { ShopifyProductImages } from './product-images';
-import { ShopifyProductPriceRange } from './product-price-range';
+import { ShopifyGetAProductQuery } from '@daffodil/driver/graphql';
 
-export interface ShopifyProductNode {
-  handle: string;
-  id: string;
-  title: string;
-  description: string;
-  onlineStoreUrl: string | null;
-  availableForSale: boolean;
-  priceRange: ShopifyProductPriceRange;
-  images: ShopifyProductImages;
-}
+export type ShopifyProductNodeType = ShopifyGetAProductQuery['product'];
+
+export interface ShopifyProductNode extends ShopifyProductNodeType {}

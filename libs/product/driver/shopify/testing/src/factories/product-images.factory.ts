@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { DaffModelFactory } from '@daffodil/core/testing';
 import { ShopifyProductImages } from '@daffodil/product/driver/shopify';
 
-import { ShopifyImageNodeFactory } from './image-node.factory';
+import { ShopifyProductImageNodeFactory } from './product-image-node.factory';
 
 class MockShopifyProductImages implements ShopifyProductImages {
-  nodes = this.shopifyImageNodeFactory.createMany();
+  nodes = this.shopifyProductImageNodeFactory.createMany();
 
   constructor(
-    protected shopifyImageNodeFactory: ShopifyImageNodeFactory,
+    protected shopifyProductImageNodeFactory: ShopifyProductImageNodeFactory,
   ) {}
 }
 
@@ -18,8 +18,8 @@ class MockShopifyProductImages implements ShopifyProductImages {
 })
 export class ShopifyProductImagesFactory extends DaffModelFactory<ShopifyProductImages> {
   constructor(
-    shopifyImageNodeFactory: ShopifyImageNodeFactory,
+    shopifyProductImageNodeFactory: ShopifyProductImageNodeFactory,
   ){
-    super(MockShopifyProductImages, shopifyImageNodeFactory);
+    super(MockShopifyProductImages, shopifyProductImageNodeFactory);
   }
 }

@@ -1,5 +1,5 @@
-import { ShopifyProductNode } from './product-node';
+import { ShopifyGetAllProductsQuery } from '@daffodil/driver/graphql';
 
-export interface ShopifyProductGraph {
-  nodes: ShopifyProductNode[];
-}
+type ShopifyProductGraphType = ShopifyGetAllProductsQuery['products'];
+
+export interface ShopifyProductGraph extends ShopifyProductGraphType {};

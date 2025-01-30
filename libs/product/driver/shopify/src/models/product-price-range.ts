@@ -1,5 +1,5 @@
-import { ShopifyMoney } from '@daffodil/driver/shopify';
+import { ShopifyProductNode } from './product-node';
 
-export interface ShopifyProductPriceRange {
-  maxVariantPrice: ShopifyMoney;
-}
+type ShopifyProductPriceRangeType = ShopifyProductNode['priceRange'];
+
+export interface ShopifyProductPriceRange extends ShopifyProductPriceRangeType {}

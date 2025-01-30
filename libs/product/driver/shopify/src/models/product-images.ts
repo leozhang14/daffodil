@@ -1,5 +1,5 @@
-import { ShopifyImageNode } from './image-node';
+import { ShopifyProductNode } from './product-node';
 
-export interface ShopifyProductImages {
-  nodes: ShopifyImageNode[];
-}
+type ShopifyProductImagesType = ShopifyProductNode['images'];
+
+export interface ShopifyProductImages extends ShopifyProductImagesType {}
