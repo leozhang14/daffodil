@@ -1,0 +1,6 @@
+{
+	"scripts": {
+		"shopify:codegen:generate": "graphql-codegen"
+	}
+}
+		
