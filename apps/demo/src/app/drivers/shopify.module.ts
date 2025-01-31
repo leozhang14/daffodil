@@ -10,8 +10,7 @@ import { DaffAuthorizeNetInMemoryDriverModule } from '@daffodil/authorizenet/dri
 import { DaffCartInMemoryDriverModule } from '@daffodil/cart/driver/in-memory';
 import { DaffCategoryInMemoryDriverModule } from '@daffodil/category/driver/in-memory';
 import { DaffInMemoryDriverModule } from '@daffodil/driver/in-memory';
-import { createApolloConfig } from '@daffodil/driver/shopify';
-import { shopifyDriverConfig } from '@daffodil/driver/shopify';
+import { provideShopifyApolloDriver } from '@daffodil/driver/shopify';
 import { DaffNavigationInMemoryDriverModule } from '@daffodil/navigation/driver/in-memory';
 import { DaffNewsletterInMemoryDriverModule } from '@daffodil/newsletter/driver/in-memory';
 import { DaffProductShopifyDriverModule } from '@daffodil/product/driver/shopify';
@@ -23,6 +22,9 @@ import {
 
 import { environment } from '../../environments/environment';
 import { ShopifyEnviromentDriverConfiguration } from '../../environments/environment.interface';
+
+const domain = (<ShopifyEnviromentDriverConfiguration>environment.driver).domain;
+const accessToken = (<ShopifyEnviromentDriverConfiguration>environment.driver).publicAccessToken;
 
 @NgModule({
   imports: [
@@ -36,11 +38,7 @@ import { ShopifyEnviromentDriverConfiguration } from '../../environments/environ
   ],
   providers: [
     provideDaffProductExtraFactoryTypes(DaffDefaultProductFactory),
-    provideApollo(
-      () => createApolloConfig(shopifyDriverConfig(
-        (<ShopifyEnviromentDriverConfiguration>environment.driver).domain,
-        (<ShopifyEnviromentDriverConfiguration>environment.driver).publicAccessToken)),
-    ),
+    provideShopifyApolloDriver(domain, accessToken),
   ],
 })
 export class DemoDriverModule {}

@@ -1,1 +1,1 @@
-export { createApolloConfig } from './create-apollo-config';
+export { provideShopifyApolloDriver } from './provide-shopify-apollo-driver';
