@@ -9,12 +9,12 @@ import {
 import { DaffAuthorizeNetInMemoryDriverModule } from '@daffodil/authorizenet/driver/in-memory';
 import { DaffCartInMemoryDriverModule } from '@daffodil/cart/driver/in-memory';
 import { DaffCategoryInMemoryDriverModule } from '@daffodil/category/driver/in-memory';
-import { createApolloConfig } from '@daffodil/driver/shopify';
 import { DaffInMemoryDriverModule } from '@daffodil/driver/in-memory';
+import { createApolloConfig } from '@daffodil/driver/shopify';
+import { shopifyDriverConfig } from '@daffodil/driver/shopify';
 import { DaffNavigationInMemoryDriverModule } from '@daffodil/navigation/driver/in-memory';
 import { DaffNewsletterInMemoryDriverModule } from '@daffodil/newsletter/driver/in-memory';
 import { DaffProductShopifyDriverModule } from '@daffodil/product/driver/shopify';
-import { shopifyDriverConfig } from '@daffodil/product/driver/shopify';
 import {
   DaffDefaultProductFactory,
   provideDaffProductExtraFactoryTypes,
