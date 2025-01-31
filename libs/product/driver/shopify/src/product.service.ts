@@ -48,7 +48,6 @@ implements DaffProductServiceInterface {
       .pipe(
         map((result) => {
           const nodes = result.data?.products?.nodes || [];
-          console.log(nodes);
           return nodes.map((node) => daffShopifyProductTransformer(node));
         }),
       );
