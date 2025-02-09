@@ -96,7 +96,7 @@ describe('Driver | Shopify | Product | ProductService', () => {
 
       const op = controller.expectOne(getProduct);
 
-      expect(op.operation.variables.id).toEqual(product.id);
+      expect(op.operation.variables.id).toEqual(`gid://shopify/Product/${product.id}`);
 
       op.flush({
         data: {

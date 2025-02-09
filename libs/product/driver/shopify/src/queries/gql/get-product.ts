@@ -4,7 +4,7 @@ import { ShopifyProductSingleResponse } from '../response.types';
 import { ShopifyProductIDVariables } from '../variables.types';
 
 /**
- * GraphQL query object for getting all products.
+ * GraphQL query object for getting a single product by ID.
  */
 export const getProduct = gql<ShopifyProductSingleResponse, ShopifyProductIDVariables>`
  query ShopifyGetAProduct($id: ID!) {

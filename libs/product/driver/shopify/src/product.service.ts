@@ -19,14 +19,14 @@ import {
 } from './queries/public_api';
 import {
   daffShopifyProductTransformer,
+  shopifyProductIdTransformer,
   shopifyUrlTransformer,
 } from './transforms/public_api';
 
 /**
- * A service for getting DaffProducts from apollo shopify product requests.
+ * A service for getting DaffProducts {@link DaffProduct} from apollo shopify product requests.
  *
  * @inheritdoc
- * @Param apollo
  */
 @Injectable({
   providedIn: 'root',
@@ -63,7 +63,7 @@ implements DaffProductServiceInterface {
     return this.apollo
       .query<ShopifyProductSingleResponse>({
         query: getProduct,
-        variables: { id: productId },
+        variables: { id: shopifyProductIdTransformer(productId) },
       })
       .pipe(
         map((result) => {
