@@ -1,4 +1,4 @@
-import { ShopifyGetAProductQuery } from '@daffodil/driver/shopify';
+import { ShopifyGetAProductQuery } from '../codegen/generated-shopify-types';
 
 export type ShopifyProductNodeType = ShopifyGetAProductQuery['product'];
 

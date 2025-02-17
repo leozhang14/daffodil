@@ -4,6 +4,7 @@ import {
   ApolloTestingController,
 } from 'apollo-angular/testing';
 
+import { shopifyUrlTransformer } from '@daffodil/driver/shopify';
 import { DaffProductFactory } from '@daffodil/product/testing';
 
 
@@ -13,7 +14,6 @@ import {
   getProduct,
   getProductByUrl,
 } from './queries/public_api';
-import { shopifyUrlTransformer } from './transforms/public_api';
 
 describe('Driver | Shopify | Product | ProductService', () => {
   let productService: DaffShopifyProductService;

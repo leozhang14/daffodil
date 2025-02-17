@@ -5,8 +5,8 @@ import { DaffModelFactory } from '@daffodil/core/testing';
 import {
   ShopifyProductNode,
   shopifyHandleTransformer,
-  shopifyProductIdTransformer,
-} from '@daffodil/product/driver/shopify';
+  shopifyIdTransformer,
+} from '@daffodil/driver/shopify';
 
 import { ShopifyProductImagesFactory } from './product-images.factory';
 import { ShopifyProductPriceRangeFactory } from './product-price-range.factory';
@@ -14,7 +14,7 @@ import { ShopifyProductPriceRangeFactory } from './product-price-range.factory';
 class MockShopifyProductNode implements ShopifyProductNode {
   title = faker.commerce.productName();
   handle = shopifyHandleTransformer(faker.commerce.productName());
-  id = shopifyProductIdTransformer(`${faker.datatype.number({ min: 100000000000 })}`);
+  id = shopifyIdTransformer(`${faker.datatype.number({ min: 100000000000 })}`, 'Product');
   description = faker.commerce.productDescription();
   onlineStoreUrl = faker.internet.domainName();
   availableForSale = faker.datatype.boolean();

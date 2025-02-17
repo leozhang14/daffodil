@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { DaffModelFactory } from '@daffodil/core/testing';
-import { ShopifyMoneyFactory } from '@daffodil/driver/shopify/testing';
-import { ShopifyProductPriceRange } from '@daffodil/product/driver/shopify';
+import { ShopifyProductPriceRange } from '@daffodil/driver/shopify';
+
+import { ShopifyMoneyFactory } from './money.factory';
 
 class MockShopifyProductPriceRange implements ShopifyProductPriceRange {
   maxVariantPrice = this.shopifyMoneyFactory.create();

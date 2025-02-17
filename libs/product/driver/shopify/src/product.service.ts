@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { DaffLocatable } from '@daffodil/core';
+import {
+  shopifyIdTransformer,
+  shopifyUrlTransformer,
+} from '@daffodil/driver/shopify';
 import { DaffProduct } from '@daffodil/product';
 import {
   DaffProductDriverResponse,
@@ -17,11 +21,7 @@ import {
   ShopifyProductAllResponse,
   ShopifyProductSingleResponse,
 } from './queries/public_api';
-import {
-  daffShopifyProductTransformer,
-  shopifyProductIdTransformer,
-  shopifyUrlTransformer,
-} from './transforms/public_api';
+import { daffShopifyProductTransformer } from './transforms/public_api';
 
 /**
  * A service for getting DaffProducts {@link DaffProduct} from apollo shopify product requests.
@@ -63,7 +63,7 @@ implements DaffProductServiceInterface {
     return this.apollo
       .query<ShopifyProductSingleResponse>({
         query: getProduct,
-        variables: { id: shopifyProductIdTransformer(productId) },
+        variables: { id: shopifyIdTransformer(productId, 'Product') },
       })
       .pipe(
         map((result) => {

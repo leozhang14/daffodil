@@ -1,4 +1,4 @@
-import { ShopifyGetAllProductsQuery } from '@daffodil/driver/shopify';
+import { ShopifyGetAllProductsQuery } from '../codegen/generated-shopify-types';
 
 type ShopifyProductGraphType = ShopifyGetAllProductsQuery['products'];
 

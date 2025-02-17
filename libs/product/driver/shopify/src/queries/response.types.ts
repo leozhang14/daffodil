@@ -1,5 +1,7 @@
-import { ShopifyProductGraph } from '../models/product-graph';
-import { ShopifyProductNode } from '../models/product-node';
+import {
+  ShopifyProductNode,
+  ShopifyProductGraph,
+} from '@daffodil/driver/shopify';
 
 export interface ShopifyProductAllResponse {
   products?: ShopifyProductGraph;

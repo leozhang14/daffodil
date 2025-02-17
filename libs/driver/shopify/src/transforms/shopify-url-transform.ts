@@ -1,7 +1,7 @@
 /**
- * Transforms a DaffProduct url (DaffLocatable) into a Shopify Product handle string
+ * Transforms a DaffLocatable url into a Shopify handle string
  *
- * See {@link DaffLocatable} for more information on the requirements for the url argument of {@link DaffProduct}.
+ * See {@link DaffLocatable} for more information on the requirements for the url argument.
  *
  * @param url - string
  * @returns string

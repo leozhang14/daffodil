@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { DaffModelFactory } from '@daffodil/core/testing';
-import { ShopifyProductGraph } from '@daffodil/product/driver/shopify';
+import { ShopifyProductGraph } from '@daffodil/driver/shopify';
 
 import { ShopifyProductNodeFactory } from './product-node.factory';
 
@@ -12,7 +12,6 @@ class MockShopifyProductGraph implements ShopifyProductGraph {
     protected shopifyProductNodeFactory: ShopifyProductNodeFactory,
   ) {}
 }
-
 
 @Injectable({
   providedIn: 'root',

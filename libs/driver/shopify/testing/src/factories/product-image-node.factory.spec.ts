@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ShopifyProductImageNode } from '@daffodil/product/driver/shopify';
+import { ShopifyProductImageNode } from '@daffodil/driver/shopify';
 
 import { ShopifyProductImageNodeFactory } from './product-image-node.factory';
 

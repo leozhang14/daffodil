@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ShopifyProductPriceRange } from '@daffodil/product/driver/shopify';
+import { ShopifyProductPriceRange } from '@daffodil/driver/shopify';
 
 import { ShopifyProductPriceRangeFactory } from './product-price-range.factory';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { DaffModelFactory } from '@daffodil/core/testing';
-import { ShopifyProductImages } from '@daffodil/product/driver/shopify';
+import { ShopifyProductImages } from '@daffodil/driver/shopify';
 
 import { ShopifyProductImageNodeFactory } from './product-image-node.factory';
 

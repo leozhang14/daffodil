@@ -1,9 +1,9 @@
+import { ShopifyProductNode } from '@daffodil/driver/shopify';
 import {
   DaffProduct,
   DaffProductTypeEnum,
 } from '@daffodil/product';
 
-import { ShopifyProductNode } from '../models/product-node';
 
 /**
  * Transforms a ProductNode into a different object.

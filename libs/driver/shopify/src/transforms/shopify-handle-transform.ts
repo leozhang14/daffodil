@@ -1,5 +1,5 @@
 /**
- * Transforms a faker-js generated product name to a valid shopify handle (lowercase chars with hyphens instead of spaces)
+ * Transforms a faker-js generated object name to a valid shopify handle (lowercase chars with hyphens instead of spaces)
  *
  * @param title - string
  * @returns string
