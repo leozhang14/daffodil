@@ -64,6 +64,7 @@
     "@angular/language-service": "^19.0.0",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/fragment-matcher": "^5.0.0",
+    "@graphql-codegen/typescript-apollo-angular": "^4.0.0",
     "@ngrx/schematics": "^19.0.0",
     "@ngrx/store-devtools": "^19.0.0",
     "@stylistic/eslint-plugin": "^2.7.2",
