@@ -76,9 +76,6 @@ implements DaffProductServiceInterface {
       );
   }
 
-  /**
-   * See {@link DaffLocatable} for more information on the requirements for the url argument of {@link DaffProduct}.
-   */
   getByUrl(url: DaffProduct['url']): Observable<DaffProductDriverResponse> {
     return this.apollo
       .query<ShopifyProductSingleResponse>({
