@@ -1,162 +1,98 @@
 import { Injectable } from '@angular/core';
-import {
-  Apollo,
-  gql,
-} from 'apollo-angular';
-import {
-  Observable,
-  of,
-} from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { DaffLocatable } from '@daffodil/core';
 import {
-  DaffProduct,
-  DaffProductTypeEnum,
-} from '@daffodil/product';
+  shopifyIdTransformer,
+  shopifyUrlTransformer,
+} from '@daffodil/driver/shopify';
+import { DaffProduct } from '@daffodil/product';
 import {
   DaffProductDriverResponse,
   DaffProductServiceInterface,
 } from '@daffodil/product/driver';
 
-interface GetAllProductsResponse {
-  shop?: ShopGraph;
-}
-
-interface GetAProductResponse {
-  node: ProductNode;
-}
-
-interface ShopGraph {
-  products?: ProductGraph;
-}
-
-interface ProductGraph {
-  edges: ProductEdge[];
-}
-
-interface ProductEdge {
-  node: ProductNode;
-}
-
-interface ProductNode {
-  __typename?: 'Product';
-  id: string;
-  title?: string;
-  price?: string;
-}
-
-interface Variables {
-  first: number;
-};
-
+import {
+  getAllProducts,
+  getProduct,
+  getProductByUrl,
+  ShopifyProductAllResponse,
+  ShopifyProductSingleResponse,
+} from './queries/public_api';
+import { daffShopifyProductTransformer } from './transforms/public_api';
 
 /**
- * GraphQL query object for getting all products.
- */
-export const GetAllProductsQuery = gql`
-  query ShopifyGetAllProducts($length: Int) {
-    shop {
-      products(first: $length)  {
-        edges {
-          node {
-            id
-            title
-          }
-        }
-      }
-    }
-  }
-`;
-
-/**
- * GraphQL query object for getting a product by ID.
- */
-export const GetAProduct = gql`
-  query ShopifyGetAProduct($id: ID!){
-    node(id: $id) {
-      id
-      ... on Product {
-        title
-      }
-    }
-  }
-`;
-
-/**
- * Transforms a ProductNode into a different object.
- *
- * @param node - ProductNode object
- * @returns A Product object
- */
-export const DaffShopifyProductTransformer = (node: ProductNode): DaffProduct => ({
-  id: node.id,
-  url: null,
-  name: node.title,
-  images: [],
-  thumbnail: null,
-  type: DaffProductTypeEnum.Simple,
-  price: null,
-  discount: null,
-  in_stock: true,
-});
-
-/**
- * A service for getting DaffProducts from apollo shopify product requests.
+ * A service for getting DaffProducts {@link DaffProduct} from apollo shopify product requests.
  *
  * @inheritdoc
- * @Param apollo
  */
 @Injectable({
   providedIn: 'root',
 })
-export class DaffShopifyProductService implements DaffProductServiceInterface {
-
+export class DaffShopifyProductService
+implements DaffProductServiceInterface {
   defaultLength = 20;
 
   constructor(private apollo: Apollo) {}
 
-  getByUrl(url: DaffProduct['url']): Observable<DaffProductDriverResponse> {
-    // TODO: implement
-    return of({
-      id: null,
-      products: [],
-    });
-  }
-
   getAll(): Observable<DaffProduct[]> {
-    return this.apollo.query<GetAllProductsResponse>({
-      query: GetAllProductsQuery,
-      variables: {
-        length: this.defaultLength,
-      },
-    }).pipe(
-      map(result => result.data.shop.products.edges.map(edge => DaffShopifyProductTransformer(edge.node))),
-    );
+    return this.apollo
+      .query<ShopifyProductAllResponse>({
+        query: getAllProducts,
+        variables: {
+          length: this.defaultLength,
+        },
+      })
+      .pipe(
+        map((result) => {
+          const nodes = result.data?.products?.nodes || [];
+          return nodes.map((node) => daffShopifyProductTransformer(node));
+        }),
+      );
   }
 
-  //todo: add actual getBestSellers apollo call. Right now, it just makes the getAll() call
+  // todo: implement getBestSellers
+  // todo: move to separate getBestSellers module
   getBestSellers(): Observable<DaffProduct[]> {
-    return this.apollo.query<GetAllProductsResponse>({
-      query: GetAllProductsQuery,
-      variables: {
-        length: this.defaultLength,
-      },
-    }).pipe(
-      map(result => result.data.shop.products.edges.map(edge => DaffShopifyProductTransformer(edge.node))),
-    );
+    return this.getAll();
   }
 
-  get(productId: string): Observable<DaffProductDriverResponse> {
-    return this.apollo.query<GetAProductResponse>({
-      query: GetAProduct,
-      variables: {
-        id: productId,
-      },
-    }).pipe(
-      map(result => ({
-        id: productId,
-        products: [DaffShopifyProductTransformer(result.data.node)],
-      })),
-    );
+  get(productId: DaffProduct['id']): Observable<DaffProductDriverResponse> {
+    return this.apollo
+      .query<ShopifyProductSingleResponse>({
+        query: getProduct,
+        variables: { id: shopifyIdTransformer(productId, 'Product') },
+      })
+      .pipe(
+        map((result) => {
+          const productNode = result.data;
+          return {
+            id: productNode.id,
+            products: [daffShopifyProductTransformer(productNode)],
+          };
+        }),
+      );
+  }
+
+  /**
+   * See {@link DaffLocatable} for more information on the requirements for the url argument of {@link DaffProduct}.
+   */
+  getByUrl(url: DaffProduct['url']): Observable<DaffProductDriverResponse> {
+    return this.apollo
+      .query<ShopifyProductSingleResponse>({
+        query: getProductByUrl,
+        variables: { handle: shopifyUrlTransformer(url) },
+      })
+      .pipe(
+        map((result) => {
+          const productNode = result.data;
+          return {
+            id: productNode.id,
+            products: [daffShopifyProductTransformer(productNode)],
+          };
+        }),
+      );
   }
 }

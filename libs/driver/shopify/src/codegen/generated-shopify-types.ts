@@ -1,4 +1,6 @@
 import { gql } from 'apollo-angular';
+import { Injectable } from '@angular/core';
+import * as Apollo from 'apollo-angular';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -8681,3 +8683,147 @@ export enum WeightUnit {
   /** 1 pound equals 16 ounces. */
   Pounds = 'POUNDS'
 }
+
+export type ShopifyGetAllProductsQueryVariables = Exact<{
+  length?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type ShopifyGetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', handle: string, onlineStoreUrl?: any | null, availableForSale: boolean, id: string, title: string, description: string, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } }> } };
+
+export type ShopifyGetProductByUrlQueryVariables = Exact<{
+  handle: Scalars['String']['input'];
+}>;
+
+
+export type ShopifyGetProductByUrlQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', handle: string, id: string, title: string, description: string, availableForSale: boolean, onlineStoreUrl?: any | null, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } } | null };
+
+export type ShopifyGetAProductQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ShopifyGetAProductQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', handle: string, id: string, title: string, description: string, availableForSale: boolean, onlineStoreUrl?: any | null, priceRange: { __typename?: 'ProductPriceRange', maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', id?: string | null, url: any, altText?: string | null }> } } | null };
+
+export const ShopifyGetAllProductsDocument = gql`
+    query ShopifyGetAllProducts($length: Int) {
+  products(first: $length) {
+    nodes {
+      handle
+      onlineStoreUrl
+      availableForSale
+      priceRange {
+        maxVariantPrice {
+          amount
+          currencyCode
+        }
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      id
+      title
+      description
+      images(first: 1) {
+        nodes {
+          id
+          url
+          altText
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ShopifyGetAllProductsGQL extends Apollo.Query<ShopifyGetAllProductsQuery, ShopifyGetAllProductsQueryVariables> {
+    document = ShopifyGetAllProductsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ShopifyGetProductByUrlDocument = gql`
+    query ShopifyGetProductByURL($handle: String!) {
+  product(handle: $handle) {
+    handle
+    id
+    title
+    description
+    availableForSale
+    priceRange {
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    images(first: 1) {
+      nodes {
+        id
+        url
+        altText
+      }
+    }
+    onlineStoreUrl
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ShopifyGetProductByUrlGQL extends Apollo.Query<ShopifyGetProductByUrlQuery, ShopifyGetProductByUrlQueryVariables> {
+    document = ShopifyGetProductByUrlDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ShopifyGetAProductDocument = gql`
+    query ShopifyGetAProduct($id: ID!) {
+  product(id: $id) {
+    handle
+    id
+    title
+    description
+    availableForSale
+    priceRange {
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    images(first: 1) {
+      nodes {
+        id
+        url
+        altText
+      }
+    }
+    onlineStoreUrl
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ShopifyGetAProductGQL extends Apollo.Query<ShopifyGetAProductQuery, ShopifyGetAProductQueryVariables> {
+    document = ShopifyGetAProductDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }

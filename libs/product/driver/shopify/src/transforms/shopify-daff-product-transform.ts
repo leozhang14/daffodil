@@ -1,0 +1,32 @@
+import { ShopifyProductNode } from '@daffodil/driver/shopify';
+import {
+  DaffProduct,
+  DaffProductTypeEnum,
+} from '@daffodil/product';
+
+
+/**
+ * Transforms a ProductNode into a different object.
+ *
+ * @param node - ProductNode object
+ * @returns A Product object
+ */
+export const daffShopifyProductTransformer = (node: ShopifyProductNode): DaffProduct => ({
+  name: node.title,
+  images: node.images.nodes.map(imageNode => ({
+    id: imageNode.id,
+    url: imageNode.url,
+    label: imageNode.altText ?? '',
+  })),
+  thumbnail: {
+    url: node.images.nodes[0]?.url,
+    label: node.images.nodes[0]?.altText ?? '',
+    id: node.images.nodes[0]?.id,
+  },
+  id: node.id,
+  url: `/${node.handle}`,
+  type: DaffProductTypeEnum.Simple,
+  price: node.priceRange.maxVariantPrice.amount,
+  in_stock: node.availableForSale,
+  description: node.description,
+});
