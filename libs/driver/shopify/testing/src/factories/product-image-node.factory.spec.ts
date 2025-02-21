@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ShopifyProductImageNode } from '@daffodil/driver/shopify';
+import { ShopifyImageNode } from '@daffodil/driver/shopify';
 
 import { ShopifyProductImageNodeFactory } from './product-image-node.factory';
 
@@ -22,7 +22,7 @@ describe('@daffodil/product/driver/shopify/testing | ShopifyProductImageNodeFact
 
   describe('create', () => {
 
-    let result: ShopifyProductImageNode;
+    let result: ShopifyImageNode;
 
     beforeEach(() => {
       result = factory.create();

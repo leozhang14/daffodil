@@ -4,11 +4,11 @@ import { faker } from '@faker-js/faker/locale/en_US';
 
 import { DaffModelFactory } from '@daffodil/core/testing';
 import {
-  ShopifyProductImageNode,
+  ShopifyImageNode,
   shopifyIdTransformer,
 } from '@daffodil/driver/shopify';
 
-class MockShopifyProductImageNode implements ShopifyProductImageNode {
+class MockShopifyProductImageNode implements ShopifyImageNode {
   id = shopifyIdTransformer(`${faker.datatype.number({ min: 10000000000 })}`, 'ProductImage');
   url = faker.image.imageUrl();
   altText = faker.random.words(5);
@@ -17,7 +17,7 @@ class MockShopifyProductImageNode implements ShopifyProductImageNode {
 @Injectable({
   providedIn: 'root',
 })
-export class ShopifyProductImageNodeFactory extends DaffModelFactory<ShopifyProductImageNode> {
+export class ShopifyProductImageNodeFactory extends DaffModelFactory<ShopifyImageNode> {
   constructor(){
     super(MockShopifyProductImageNode);
   }
