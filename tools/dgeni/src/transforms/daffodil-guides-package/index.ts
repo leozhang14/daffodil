@@ -30,10 +30,7 @@ import {
   GENERATE_NAV_LIST_PROCESSOR_PROVIDER,
   GenerateNavListProcessor,
 } from '../../processors/generateNavList';
-import {
-  MARKDOWN_CODE_PROCESSOR_PROVIDER,
-  MarkdownCodeProcessor,
-} from '../../processors/markdown';
+import { MarkdownCodeProcessor } from '../../processors/markdown';
 import { IdSanitizer } from '../../services/id-sanitizer';
 import { outputPathsConfigurator } from '../../utils/configurator/output';
 import { pathsConfigurator } from '../../utils/configurator/path';
@@ -53,7 +50,6 @@ const docTypes = ['guide', 'package-guide'];
 const base = new Package('daffodil-guides-base', [daffodilBasePackage])
   .factory('guideFileReader', guideFileReaderFactory)
   .factory(...INDEX_FILE_READER_PROVIDER)
-  .processor(...MARKDOWN_CODE_PROCESSOR_PROVIDER)
   .config((markdown: MarkdownCodeProcessor, addKind: AddKindProcessor, convertToJson, breadcrumb: BreadcrumbProcessor) => {
     addKind.docTypes.push(...docTypes);
     markdown.docTypes.push(...docTypes);

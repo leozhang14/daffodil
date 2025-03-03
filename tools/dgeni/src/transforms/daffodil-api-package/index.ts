@@ -33,10 +33,7 @@ import { FilterContainedDocsProcessor } from '../../processors/filterDocs';
 import { FilterOutPrivatePropertiesProcessor } from '../../processors/filterOutPrivateProperties';
 import { GenerateNavListProcessor } from '../../processors/generateNavList';
 import { MakeTypesHtmlCompatibleProcessor } from '../../processors/makeTypesHtmlCompatible';
-import {
-  MARKDOWN_CODE_PROCESSOR_PROVIDER,
-  MarkdownCodeProcessor,
-} from '../../processors/markdown';
+import { MarkdownCodeProcessor } from '../../processors/markdown';
 import {
   PACKAGES_PROCESSOR_PROVIDER,
   PackagesProcessor,
@@ -70,7 +67,6 @@ export const apiDocsBase = new Package('api-base', [
   .processor(...PACKAGES_PROCESSOR_PROVIDER)
   .processor(...ADD_PACKAGE_EXPORTS_PROCESSOR_PROVIDER)
   .processor(...ADD_SUBPACKAGE_EXPORTS_PROCESSOR_PROVIDER)
-  .processor(...MARKDOWN_CODE_PROCESSOR_PROVIDER)
   .processor(...COLLECT_LINKABLE_SYMBOLS_PROCESSOR_PROVIDER)
   .processor(...EXAMPLES_PROCESSOR_PROVIDER)
   .processor(...ADD_SOURCE_PROVIDER)
