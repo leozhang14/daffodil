@@ -1,7 +1,8 @@
 module.exports = {
   extends: '../../.eslintrc.js',
   ignorePatterns: [
-    '!**/*'
+    '!**/*',
+    'shopify/src/codegen/generated-shopify-types.ts'
   ],
   overrides: [
     {
