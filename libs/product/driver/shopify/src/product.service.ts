@@ -3,7 +3,6 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { DaffLocatable } from '@daffodil/core';
 import {
   shopifyIdTransformer,
   shopifyUrlTransformer,
