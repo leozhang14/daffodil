@@ -1,21 +1,40 @@
 import {
+  ChangeDetectorRef,
   Directive,
   HostBinding,
-  Input,
 } from '@angular/core';
 
 @Directive({
   selector: 'li[daffBreadcrumbItem]',
-  standalone: true,
 })
 export class DaffBreadcrumbItemDirective {
+  /**
+   * @docs-private
+   */
   @HostBinding('class.daff-breadcrumb__item') class = true;
 
-  @HostBinding('attr.aria-current') get ariaCurrent() {
-    return this.active ? 'page' : 'false';
+  /**
+   * @docs-private
+   */
+  @HostBinding('class.active') get activeClass() {
+    return this._active;
   }
 
-  /** Whether or not the breadcrumb item is active */
-  @Input() @HostBinding('class.active') active = false;
+  /**
+   * @docs-private
+   */
+  @HostBinding('attr.aria-current') get ariaCurrent() {
+    return this._active ? 'page' : null;
+  }
 
+  private _active = false;
+
+  constructor( private cdRef: ChangeDetectorRef ) {}
+
+  /** Called by the DaffBreadcrumbComponent to set the active state */
+  setActive(value: boolean) {
+    this._active = value;
+
+    this.cdRef.detectChanges();
+  }
 }
