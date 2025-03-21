@@ -6,9 +6,10 @@ import {
   ShopifyProductNode,
   shopifyHandleTransformer,
   shopifyIdTransformer,
+  shopifyImageTransformer,
 } from '@daffodil/driver/shopify';
 
-import { ShopifyProductImagesFactory } from './product-images.factory';
+import { ShopifyImageNodeFactory } from './image-node.factory';
 import { ShopifyProductPriceRangeFactory } from './product-price-range.factory';
 
 class MockShopifyProductNode implements ShopifyProductNode {
@@ -19,11 +20,13 @@ class MockShopifyProductNode implements ShopifyProductNode {
   onlineStoreUrl = faker.internet.domainName();
   availableForSale = faker.datatype.boolean();
   priceRange = this.shopifyProductPriceRangeFactory.create();
-  images = this.shopifyProductImagesFactory.create();
+  images = {
+    nodes: this.shopifyImageNodeFactory.createMany().map(node => shopifyImageTransformer(node, 'ProductImage')),
+  };
 
   constructor(
     protected shopifyProductPriceRangeFactory: ShopifyProductPriceRangeFactory,
-    protected shopifyProductImagesFactory: ShopifyProductImagesFactory,
+    protected shopifyImageNodeFactory: ShopifyImageNodeFactory,
   ) {}
 }
 
@@ -33,8 +36,8 @@ class MockShopifyProductNode implements ShopifyProductNode {
 export class ShopifyProductNodeFactory extends DaffModelFactory<ShopifyProductNode, typeof MockShopifyProductNode> {
   constructor(
     shopifyProductPriceRangeFactory: ShopifyProductPriceRangeFactory,
-    shopifyProductImagesFactory: ShopifyProductImagesFactory,
+    shopifyImageNodeFactory: ShopifyImageNodeFactory,
   ) {
-    super(MockShopifyProductNode, shopifyProductPriceRangeFactory, shopifyProductImagesFactory);
+    super(MockShopifyProductNode, shopifyProductPriceRangeFactory, shopifyImageNodeFactory);
   }
 }

@@ -1,4 +1,4 @@
-import { ShopifyGetAProductQuery } from '../codegen/generated-shopify-types';
+import { ShopifyGetAProductQuery } from '../../codegen/generated-shopify-types';
 
 export type ShopifyProductNodeType = ShopifyGetAProductQuery['product'];
 
