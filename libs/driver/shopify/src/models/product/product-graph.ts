@@ -1,4 +1,4 @@
-import { ShopifyGetAllProductsQuery } from '../codegen/generated-shopify-types';
+import { ShopifyGetAllProductsQuery } from '../../codegen/generated-shopify-types';
 
 type ShopifyProductGraphType = ShopifyGetAllProductsQuery['products'];
 
