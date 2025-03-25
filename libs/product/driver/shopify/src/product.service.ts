@@ -16,9 +16,7 @@ import {
 import {
   getAllProducts,
   getProduct,
-  getProductByUrl,
-  ShopifyProductAllResponse,
-  ShopifyProductSingleResponse,
+  getProductByUrl
 } from './queries/public_api';
 import { daffShopifyProductTransformer } from './transforms/public_api';
 
