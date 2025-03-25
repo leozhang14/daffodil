@@ -38,7 +38,7 @@ implements DaffProductServiceInterface {
 
   getAll(): Observable<DaffProduct[]> {
     return this.apollo
-      .query<ShopifyProductAllResponse>({
+      .query({
         query: getAllProducts,
         variables: {
           length: this.defaultLength,
@@ -60,7 +60,7 @@ implements DaffProductServiceInterface {
 
   get(productId: DaffProduct['id']): Observable<DaffProductDriverResponse> {
     return this.apollo
-      .query<ShopifyProductSingleResponse>({
+      .query({
         query: getProduct,
         variables: { id: shopifyIdTransformer(productId, 'Product') },
       })
@@ -77,7 +77,7 @@ implements DaffProductServiceInterface {
 
   getByUrl(url: DaffProduct['url']): Observable<DaffProductDriverResponse> {
     return this.apollo
-      .query<ShopifyProductSingleResponse>({
+      .query({
         query: getProductByUrl,
         variables: { handle: shopifyUrlTransformer(url) },
       })
