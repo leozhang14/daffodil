@@ -16,7 +16,7 @@ class MockShopifyProductImages implements ShopifyProductImages {
 @Injectable({
   providedIn: 'root',
 })
-export class ShopifyProductImagesFactory extends DaffModelFactory<ShopifyProductImages> {
+export class ShopifyProductImagesFactory extends DaffModelFactory<ShopifyProductImages, typeof MockShopifyProductImages> {
   constructor(
     shopifyProductImageNodeFactory: ShopifyProductImageNodeFactory,
   ){

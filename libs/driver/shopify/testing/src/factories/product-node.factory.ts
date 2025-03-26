@@ -30,7 +30,7 @@ class MockShopifyProductNode implements ShopifyProductNode {
 @Injectable({
   providedIn: 'root',
 })
-export class ShopifyProductNodeFactory extends DaffModelFactory<ShopifyProductNode> {
+export class ShopifyProductNodeFactory extends DaffModelFactory<ShopifyProductNode, typeof MockShopifyProductNode> {
   constructor(
     shopifyProductPriceRangeFactory: ShopifyProductPriceRangeFactory,
     shopifyProductImagesFactory: ShopifyProductImagesFactory,

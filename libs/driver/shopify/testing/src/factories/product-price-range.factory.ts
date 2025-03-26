@@ -16,7 +16,7 @@ class MockShopifyProductPriceRange implements ShopifyProductPriceRange {
 @Injectable({
   providedIn: 'root',
 })
-export class ShopifyProductPriceRangeFactory extends DaffModelFactory<ShopifyProductPriceRange> {
+export class ShopifyProductPriceRangeFactory extends DaffModelFactory<ShopifyProductPriceRange, typeof MockShopifyProductPriceRange> {
   constructor(
     shopifyMoneyFactory: ShopifyMoneyFactory,
   ){
