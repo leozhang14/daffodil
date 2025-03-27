@@ -15,7 +15,7 @@ class MockShopifyMoney implements ShopifyMoney {
 @Injectable({
   providedIn: 'root',
 })
-export class ShopifyMoneyFactory extends DaffModelFactory<ShopifyMoney> {
+export class ShopifyMoneyFactory extends DaffModelFactory<ShopifyMoney, typeof MockShopifyMoney> {
   constructor(){
     super(MockShopifyMoney);
   }

@@ -4,14 +4,16 @@ import {
   ApolloTestingController,
 } from 'apollo-angular/testing';
 
+import { shopifyUrlTransformer } from '@daffodil/driver/shopify';
 import { DaffProductFactory } from '@daffodil/product/testing';
 
 
+import { DaffShopifyProductService } from './product.service';
 import {
-  DaffShopifyProductService,
-  GetAllProductsQuery,
-  GetAProduct,
-} from './product.service';
+  getAllProducts,
+  getProduct,
+  getProductByUrl,
+} from './queries/public_api';
 
 describe('Driver | Shopify | Product | ProductService', () => {
   let productService: DaffShopifyProductService;
@@ -48,19 +50,30 @@ describe('Driver | Shopify | Product | ProductService', () => {
 
       const products = productFactory.createMany(20);
 
-      const op = controller.expectOne(GetAllProductsQuery);
+      const op = controller.expectOne(getAllProducts);
 
       expect(op.operation.variables.length).toEqual(20);
 
       op.flush({
         data:{
-          shop: {
-            products: {
-              edges: products.map(product => ({ node: {
-                title: product.name,
-                id: product.id,
-              }})),
-            },
+          products: {
+            nodes: products.map((product) => ({
+              handle: '',
+              onlineStoreUrl: product.canonicalUrl,
+              availableForSale: product.in_stock,
+              priceRange: {
+                maxVariantPrice: {
+                  amount: product.price,
+                  currencyCode: 'USD',
+                },
+              },
+              id: product.id,
+              title: product.name,
+              description: product.description,
+              images: {
+                nodes: [],
+              },
+            })),
           },
         },
       });
@@ -81,16 +94,65 @@ describe('Driver | Shopify | Product | ProductService', () => {
         done();
       });
 
-      const op = controller.expectOne(GetAProduct);
+      const op = controller.expectOne(getProduct);
 
-      expect(op.operation.variables.id).toEqual(product.id);
+      expect(op.operation.variables.id).toEqual(`gid://shopify/Product/${product.id}`);
 
       op.flush({
         data: {
-          node: {
-            __typename: 'Product',
-            id: product.id,
-            title: product.name,
+          handle: '',
+          id: product.id,
+          title: product.name,
+          description: product.description,
+          availableForSale: product.in_stock,
+          onlineStoreUrl: product.canonicalUrl,
+          priceRange: {
+            maxVariantPrice: {
+              amount: product.price,
+              currencyCode: 'USD',
+            },
+          },
+          images: {
+            nodes: [],
+          },
+        },
+      });
+    });
+
+    afterEach(() => {
+      controller.verify();
+    });
+  });
+
+  describe('getByUrl | getting a single product', () => {
+    it('should return an observable single product', done => {
+      const product = productFactory.create();
+
+      productService.getByUrl(product.url).subscribe((result) => {
+        expect(result.id).toEqual(product.id);
+        expect(result.products[0].name).toEqual(product.name);
+        done();
+      });
+
+      const op = controller.expectOne(getProductByUrl);
+      expect(op.operation.variables.handle).toEqual(shopifyUrlTransformer(product.url));
+
+      op.flush({
+        data: {
+          handle: '',
+          id: product.id,
+          title: product.name,
+          description: product.description,
+          availableForSale: product.in_stock,
+          onlineStoreUrl: product.canonicalUrl,
+          priceRange: {
+            maxVariantPrice: {
+              amount: product.price,
+              currencyCode: 'USD',
+            },
+          },
+          images: {
+            nodes: [],
           },
         },
       });
