@@ -1,10 +1,4 @@
 import { NgModule } from '@angular/core';
-import { InMemoryCache } from '@apollo/client/core';
-import {
-  Apollo,
-  provideApollo,
-} from 'apollo-angular';
-
 
 import { DaffAuthorizeNetInMemoryDriverModule } from '@daffodil/authorizenet/driver/in-memory';
 import { DaffCartInMemoryDriverModule } from '@daffodil/cart/driver/in-memory';
@@ -18,7 +12,6 @@ import {
   DaffDefaultProductFactory,
   provideDaffProductExtraFactoryTypes,
 } from '@daffodil/product/testing';
-
 
 import { environment } from '../../environments/environment';
 import { ShopifyEnviromentDriverConfiguration } from '../../environments/environment.interface';
