@@ -4,12 +4,12 @@ import { faker } from '@faker-js/faker/locale/en_US';
 import { DaffModelFactory } from '@daffodil/core/testing';
 import {
   ShopifyMoney,
-  CurrencyCode,
+  ShopifyCurrencyCode,
 } from '@daffodil/driver/shopify';
 
 class MockShopifyMoney implements ShopifyMoney {
   amount = parseFloat(faker.commerce.price());
-  currencyCode = faker.helpers.objectValue(CurrencyCode);
+  currencyCode = faker.helpers.objectValue(ShopifyCurrencyCode);
 }
 
 @Injectable({

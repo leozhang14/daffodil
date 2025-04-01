@@ -1,5 +1,3 @@
-import { ShopifyProductNode } from './product-node';
+import { ShopifyProductPriceRange as ShopifyProductPriceRangeType } from '../../codegen/generated-shopify-types';
 
-type ShopifyProductPriceRangeType = ShopifyProductNode['priceRange'];
-
-export interface ShopifyProductPriceRange extends ShopifyProductPriceRangeType {}
+export interface ShopifyProductVariantsPriceRange extends ShopifyProductPriceRangeType {}
