@@ -8,6 +8,9 @@ const config: CodegenConfig = {
   generates: {
     './generated-shopify-types.ts': {
       plugins: ['typescript', 'typescript-operations', 'typescript-apollo-angular'],
+      config: {
+        typesPrefix: 'Shopify',
+      },
     },
   },
 };
