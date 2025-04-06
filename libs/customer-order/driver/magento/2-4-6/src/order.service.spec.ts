@@ -19,10 +19,12 @@ import {
   getCustomerOrders,
   MagentoCustomerOrder,
   MagentoCustomerOrders,
+  MagentoCustomerOrderSortableField,
   MagentoGetCustomerOrderResponse,
   MagentoGetCustomerOrdersResponse,
 } from '@daffodil/customer-order/driver/magento/2-4-6';
 import { MagentoCustomerOrdersFactory } from '@daffodil/customer-order/driver/magento/2-4-6/testing';
+import { MagentoSortEnum } from '@daffodil/driver/magento';
 import {
   DaffDriverMagentoError,
   schema,
@@ -116,6 +118,25 @@ describe('@daffodil/customer-order/driver/magento/2-4-6 | DaffCustomerOrderMagen
 
           const op = controller.expectOne(addTypenameToDocument(getCustomerOrders()));
           expect(op.operation.variables.sort).toBeDefined();
+
+          op.flush({
+            data: mockGetOrdersResponse,
+          });
+        });
+
+        it('should return the order collection with the default sort when none is specified', done => {
+          service.list().subscribe((result) => {
+            mockMagentoOrders.items.forEach((item) => {
+              expect(result.data[item.number]).toEqual(jasmine.objectContaining({ id: item.number }));
+              expect(result.metadata.ids).toContain(item.number);
+            });
+            done();
+          });
+
+          const op = controller.expectOne(addTypenameToDocument(getCustomerOrders()));
+          console.log(op);
+          expect(op.operation.variables.sort.sort_direction).toEqual(MagentoSortEnum.DESC);
+          expect(op.operation.variables.sort.sort_field).toEqual(MagentoCustomerOrderSortableField.CREATED_AT);
 
           op.flush({
             data: mockGetOrdersResponse,
