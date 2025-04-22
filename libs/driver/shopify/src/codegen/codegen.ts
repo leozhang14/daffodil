@@ -1,7 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: './shopify-storefront-schema.json',
+  schema: './storefront-schema.json',
   documents: [
     '../../../../../libs/*/driver/shopify/src/*/gql/**/*.ts',
   ],
