@@ -62,7 +62,12 @@ describe('Driver | Shopify | Product | ProductService', () => {
               onlineStoreUrl: product.canonicalUrl,
               availableForSale: product.in_stock,
               priceRange: {
+                __typename: 'ProductPriceRange',
                 maxVariantPrice: {
+                  amount: product.price,
+                  currencyCode: 'USD',
+                },
+                minVariantPrice: {
                   amount: product.price,
                   currencyCode: 'USD',
                 },
@@ -111,6 +116,10 @@ describe('Driver | Shopify | Product | ProductService', () => {
               amount: product.price,
               currencyCode: 'USD',
             },
+            minVariantPrice: {
+              amount: product.price,
+              currencyCode: 'USD',
+            },
           },
           images: {
             nodes: [],
@@ -147,6 +156,10 @@ describe('Driver | Shopify | Product | ProductService', () => {
           onlineStoreUrl: product.canonicalUrl,
           priceRange: {
             maxVariantPrice: {
+              amount: product.price,
+              currencyCode: 'USD',
+            },
+            minVariantPrice: {
               amount: product.price,
               currencyCode: 'USD',
             },
